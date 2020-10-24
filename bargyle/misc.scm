@@ -13,7 +13,7 @@
 (define-public (get-volume)
   (let* ((volume (string-trim-right (sys-capture "pacmd list-sinks | grep -oP 'volume: front-left: .* \\K[0-9]+(?=%)'")))
 	 (sinks (sys-capture "pacmd list-sinks"))
-	 (enabled? (string-contains sinks "muted: yes")))
+	 (enabled? (string-contains sinks "muted: no")))
     (if enabled?
 	(simple-format #f "~a%" volume)
 	(simple-format #f "~aM" volume))))
