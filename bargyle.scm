@@ -6,11 +6,8 @@
 (use-modules (bargyle sys)
 	     (bargyle bspwm)
 	     (bargyle misc)
-	     (ice-9 regex)
 	     (ice-9 futures)
-	     (ice-9 string-fun)
-	     (ice-9 threads)
-	     (srfi srfi-1))
+	     (ice-9 threads))
 
 (define m (make-mutex))
 (define widgets (make-hash-table))
