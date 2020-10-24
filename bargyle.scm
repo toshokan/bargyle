@@ -12,12 +12,6 @@
 (define m (make-mutex))
 (define widgets (make-hash-table))
 
-(define (make-update-widget mutex table hook)
-  (lambda (k v)
-    (with-mutex m
-      (hash-set! table k v))
-    (hook)))
-
 (define (bar-format)
   (display (simple-format #f "%{l}~a%{c}~a%{r}~a | ~a\n"
 			  (hash-ref widgets #:bspc "")
