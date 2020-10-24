@@ -1,0 +1,2 @@
+* bargyle
+A lightweight bar script written in GNU Guile
