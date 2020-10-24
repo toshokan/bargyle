@@ -11,11 +11,9 @@
     (hook)))
 
 (define-public (get-volume)
-  (let* ((volume (sys-capture "amixer get Master"))
-	 (enabled? (string-contains volume "[on]"))
-	 (percentage (string-trim-right
-		      (match:substring (car (list-matches "[0-9]*%" volume)))
-		      #\%)))
+  (let* ((volume (string-trim-right (sys-capture "pacmd list-sinks | grep -oP 'volume: front-left: .* \\K[0-9]+(?=%)'")))
+	 (sinks (sys-capture "pacmd list-sinks"))
+	 (enabled? (string-contains sinks "muted: yes")))
     (if enabled?
-	(simple-format #f "~a%" percentage)
-	(simple-format #f "~aM" percentage))))
+	(simple-format #f "~a%" volume)
+	(simple-format #f "~aM" volume))))
